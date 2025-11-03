@@ -43,10 +43,10 @@ const plans = [
 
 export default function PricingSection() {
   return (
-    <section className="relative bg-neutral-950 text-white">
+    <section id="pricing" className="relative bg-neutral-950 text-white">
       <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
         <div className="text-center max-w-2xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs" aria-label="Freemium model">
             <Rocket size={14} /> Freemium model
           </div>
           <h2 className="mt-3 text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">Simple, transparent pricing</h2>
@@ -72,7 +72,7 @@ export default function PricingSection() {
                   </li>
                 ))}
               </ul>
-              <button className={`mt-6 w-full rounded-md px-4 py-2 text-sm font-medium transition ${plan.featured ? 'bg-emerald-500 text-white hover:bg-emerald-400' : 'bg-white/10 text-white hover:bg-white/20'}`}>
+              <button className={`mt-6 w-full rounded-md px-4 py-2 text-sm font-medium transition ${plan.featured ? 'bg-emerald-500 text-white hover:bg-emerald-400' : 'bg-white/10 text-white hover:bg-white/20'}`} aria-label={`${plan.cta} plan`}>
                 {plan.cta}
               </button>
             </div>

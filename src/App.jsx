@@ -17,7 +17,7 @@ function App() {
           <div className="flex items-center gap-4">
             <a href="#features" className="hover:text-white transition">Features</a>
             <a href="#dashboard" className="hover:text-white transition">Demo</a>
-            <a href="#" className="hover:text-white transition">Pricing</a>
+            <a href="#pricing" className="hover:text-white transition">Pricing</a>
           </div>
         </div>
       </footer>

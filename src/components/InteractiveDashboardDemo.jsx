@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { LineChart, Users, Bell, Settings } from 'lucide-react';
 
@@ -18,6 +18,15 @@ function Metric({ label, value, delta }) {
 }
 
 export default function InteractiveDashboardDemo() {
+  const [draggable, setDraggable] = useState(false);
+
+  useEffect(() => {
+    const update = () => setDraggable(window.matchMedia('(min-width: 768px)').matches);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
   return (
     <section id="dashboard" className="relative bg-neutral-950 text-white">
       <div className="mx-auto max-w-7xl px-6 md:px-10 py-16 md:py-24">
@@ -26,18 +35,18 @@ export default function InteractiveDashboardDemo() {
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">Interactive dashboard builder</h2>
             <p className="mt-3 max-w-2xl text-neutral-300">Drag and arrange modules to create a personalized analytics feed. This live preview is just a taste of the experience inside.</p>
           </div>
-          <button className="inline-flex items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-sm hover:bg-white/20 transition">
+          <button className="inline-flex items-center gap-2 rounded-md bg-white/10 px-4 py-2 text-sm hover:bg-white/20 transition" aria-label="Customize dashboard">
             <Settings size={16} /> Customize
           </button>
         </div>
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-12 gap-4">
           <motion.div 
-            className={`md:col-span-7 ${cardClasses}`}
-            drag
+            className={`md:col-span-7 ${cardClasses} ${draggable ? 'cursor-grab active:cursor-grabbing' : ''}`}
+            drag={draggable}
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
+            whileHover={{ scale: draggable ? 1.01 : 1 }}
+            whileTap={{ scale: draggable ? 0.99 : 1 }}
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -47,8 +56,7 @@ export default function InteractiveDashboardDemo() {
               <span className="text-xs text-neutral-400">30d projection</span>
             </div>
             <div className="mt-4 h-40 w-full">
-              {/* Simple mock line chart */}
-              <svg viewBox="0 0 400 160" className="h-full w-full">
+              <svg viewBox="0 0 400 160" className="h-full w-full" aria-hidden>
                 <defs>
                   <linearGradient id="grad" x1="0" x2="0" y1="0" y2="1">
                     <stop offset="0%" stopColor="#34d399" stopOpacity="0.8" />
@@ -66,11 +74,11 @@ export default function InteractiveDashboardDemo() {
           </motion.div>
 
           <motion.div 
-            className={`md:col-span-5 ${cardClasses}`}
-            drag
+            className={`md:col-span-5 ${cardClasses} ${draggable ? 'cursor-grab active:cursor-grabbing' : ''}`}
+            drag={draggable}
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
+            whileHover={{ scale: draggable ? 1.01 : 1 }}
+            whileTap={{ scale: draggable ? 0.99 : 1 }}
           >
             <div className="flex items-center gap-2">
               <div className="grid h-8 w-8 place-items-center rounded-md bg-sky-500/10 text-sky-400"><Users size={16} /></div>
@@ -97,11 +105,11 @@ export default function InteractiveDashboardDemo() {
           </motion.div>
 
           <motion.div 
-            className={`md:col-span-4 ${cardClasses}`}
-            drag
+            className={`md:col-span-4 ${cardClasses} ${draggable ? 'cursor-grab active:cursor-grabbing' : ''}`}
+            drag={draggable}
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
+            whileHover={{ scale: draggable ? 1.01 : 1 }}
+            whileTap={{ scale: draggable ? 0.99 : 1 }}
           >
             <div className="flex items-center gap-2">
               <div className="grid h-8 w-8 place-items-center rounded-md bg-amber-500/10 text-amber-400"><Bell size={16} /></div>
@@ -115,11 +123,11 @@ export default function InteractiveDashboardDemo() {
           </motion.div>
 
           <motion.div 
-            className={`md:col-span-8 ${cardClasses}`}
-            drag
+            className={`md:col-span-8 ${cardClasses} ${draggable ? 'cursor-grab active:cursor-grabbing' : ''}`}
+            drag={draggable}
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.99 }}
+            whileHover={{ scale: draggable ? 1.01 : 1 }}
+            whileTap={{ scale: draggable ? 0.99 : 1 }}
           >
             <div className="flex items-center justify-between">
               <h3 className="font-medium">What-if simulator</h3>
